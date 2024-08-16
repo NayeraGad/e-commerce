@@ -15,7 +15,7 @@ const inputs = [
 ];
 
 export default function Register() {
-  const {setToken} = useContext(UserContext)
+  const { setToken } = useContext(UserContext);
   const [errMsg, setErrMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -60,17 +60,16 @@ export default function Register() {
   async function handleSubmit(values) {
     setIsLoading(true);
     try {
-      // Post user data to API 
+      // Post user data to API
       const { data } = await axios.post(
         "https://ecommerce.routemisr.com/api/v1/auth/signup",
         values
       );
 
-      if(data.message == 'success') {
-        setToken(data.token)
-        navigate('/login')
+      if (data.message == "success") {
+        setToken(data.token);
+        navigate("/login");
       }
-
     } catch (error) {
       setErrMsg(error.response.data.message);
     } finally {
@@ -79,7 +78,7 @@ export default function Register() {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-12">
       <h2 className="mb-2">Register Now</h2>
 
       {errMsg ? (
@@ -148,7 +147,7 @@ export default function Register() {
         <button
           type="submit"
           disabled={isLoading || !formik.isValid || !formik.dirty}
-          className="btn"
+          className="btn form-btn"
         >
           {isLoading ? (
             <LiaSpinnerSolid className=" animate-spin" />

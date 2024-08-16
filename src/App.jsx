@@ -24,6 +24,7 @@ const x = createHashRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "products",
         element: (
@@ -32,6 +33,7 @@ const x = createHashRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "categories",
         element: (
@@ -40,6 +42,7 @@ const x = createHashRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "brands",
         element: (
@@ -48,6 +51,7 @@ const x = createHashRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "cart",
         element: (
@@ -56,19 +60,20 @@ const x = createHashRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: "login",
         element: <Login />,
       },
+
       {
         path: "register",
         element: <Register />,
       },
+
       {
-        path: "",
-        element: (
-            <NotFound />
-        ),
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

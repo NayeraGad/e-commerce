@@ -63,7 +63,7 @@ export default function Login() {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto py-12">
       <h2 className="mb-2">Login Now</h2>
 
       {errMsg ? (
@@ -131,7 +131,7 @@ export default function Login() {
         <button
           type="submit"
           disabled={isLoading || !formik.isValid || !formik.dirty}
-          className="btn"
+          className="btn form-btn"
         >
           {isLoading ? (
             <LiaSpinnerSolid className=" animate-spin" />

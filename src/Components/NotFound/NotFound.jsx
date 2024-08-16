@@ -1,7 +1,9 @@
-import React from 'react'
+import error from "../../assets/images/error.svg";
 
 export default function NotFound() {
   return (
-    <div>NotFound</div>
-  )
+    <div className="flex justify-center mt-12">
+      <img src={error} alt="error" />
+    </div>
+  );
 }

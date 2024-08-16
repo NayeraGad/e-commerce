@@ -20,13 +20,17 @@
   }
 
   body {
-    @apply text-sm md:text-base;
+    @apply md:text-base;
   }
 }
 
 @layer components {
   .btn {
-    @apply block ms-auto bg-green-600 border px-4 py-2 border-green-600 rounded-lg text-white text-xl hover:bg-green-700 hover:border-green-700 transition disabled:bg-transparent disabled:border-gray-800 disabled:text-gray-500;
+    @apply block bg-green-600 border px-4 py-2 border-green-600 rounded-lg text-white text-base transition hover:bg-green-700 hover:border-green-700;
+  }
+
+  .form-btn {
+    @apply ms-auto text-xl disabled:bg-transparent disabled:border-gray-800 disabled:text-gray-500;
   }
 }
 

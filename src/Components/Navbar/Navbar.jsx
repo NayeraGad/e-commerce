@@ -37,7 +37,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-gray-50 border-gray-200 dark:bg-gray-900">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-50 border-gray-200 dark:bg-gray-900">
       <div className="container flex flex-wrap items-center mx-auto gap-5 p-4">
         <NavLink
           to=""
