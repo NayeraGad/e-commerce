@@ -37,8 +37,8 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-50 border-gray-200 dark:bg-gray-900">
-      <div className="container flex flex-wrap items-center mx-auto gap-5 p-4">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-gray-50 border-gray-200 dark:bg-gray-900 dark:shadow-sm dark:shadow-black">
+      <div className="container flex flex-wrap items-center gap-5 p-4">
         <NavLink
           to=""
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -82,7 +82,7 @@ export default function Navbar() {
                   <li key={link.name}>
                     <NavLink
                       to={link.url}
-                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
                     >
                       {link.name}
                     </NavLink>
@@ -96,7 +96,7 @@ export default function Navbar() {
                     <NavLink
                       to={link.url}
                       target="_blank"
-                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
                     >
                       {link.element}
                     </NavLink>
@@ -106,7 +106,7 @@ export default function Navbar() {
 
               <span
                 onClick={logOut}
-                className="block cursor-pointer capitalize py-2 text-center text-gray-900 font-bold rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                className="block cursor-pointer capitalize py-2 text-center text-gray-900 font-bold rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
               >
                 Log out
               </span>
@@ -118,7 +118,7 @@ export default function Navbar() {
               <li>
                 <NavLink
                   to="login"
-                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
                 >
                   Login
                 </NavLink>
@@ -127,7 +127,7 @@ export default function Navbar() {
               <li>
                 <NavLink
                   to="register"
-                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-700 lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
                 >
                   Register
                 </NavLink>

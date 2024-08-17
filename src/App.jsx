@@ -10,6 +10,7 @@ import Cart from "./Components/Cart/Cart";
 import NotFound from "./Components/NotFound/NotFound";
 import UserContextProvider from "./Context/UserContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import ProductDetails from "./Components/ProductDetails/ProductDetails";
 
 const x = createHashRouter([
   {
@@ -30,6 +31,15 @@ const x = createHashRouter([
         element: (
           <ProtectedRoute>
             <Products />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "productDetails/:id",
+        element: (
+          <ProtectedRoute>
+            <ProductDetails />
           </ProtectedRoute>
         ),
       },
