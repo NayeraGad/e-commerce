@@ -1,24 +1,22 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Brands() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [brands, setBrands] = useState([]);
+  const {
+    data: brands,
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["brands"],
+    queryFn: () => axios("https://ecommerce.routemisr.com/api/v1/brands"),
+    select: (data) => data.data.data,
+  });
 
-  async function getBrands() {
-    setIsLoading(true)
-    const { data } = await axios(
-      "https://ecommerce.routemisr.com/api/v1/brands"
-    );
-
-    setBrands(data.data)
-    setIsLoading(false)
+  if (isError) {
+    return <h3>{JSON.stringify(error.message)}</h3>;
   }
-
-  useEffect(() => {
-    getBrands();
-  }, []);
 
   return (
     <div className="container">

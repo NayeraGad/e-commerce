@@ -147,7 +147,7 @@ export default function Register() {
         <button
           type="submit"
           disabled={isLoading || !formik.isValid || !formik.dirty}
-          className="btn form-btn"
+          className="btn form-btn ms-auto"
         >
           {isLoading ? (
             <LiaSpinnerSolid className=" animate-spin" />

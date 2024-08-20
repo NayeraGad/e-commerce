@@ -1,23 +1,12 @@
-import axios from "axios";
-import { useState } from "react";
 import Loading from "../Loading/Loading";
+import useCategories from "../../Hooks/useCategories";
 
 export default function Categories() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [categories, setCategories] = useState([]);
+  const { data: categories, isLoading, isError, error } = useCategories();
 
-  async function getCategories() {
-    setIsLoading(true)
-    const { data } = await axios(
-      "https://ecommerce.routemisr.com/api/v1/categories"
-    );
-    setCategories(data.data);
-    setIsLoading(false)
+  if (isError) {
+    return <h3>{JSON.stringify(error.message)}</h3>;
   }
-
-  useState(() => {
-    getCategories();
-  }, []);
 
   return (
     <div className="container">

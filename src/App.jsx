@@ -11,6 +11,10 @@ import NotFound from "./Components/NotFound/NotFound";
 import UserContextProvider from "./Context/UserContext";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import CartContextProvider from "./Context/CartContext";
 
 const x = createHashRouter([
   {
@@ -82,6 +86,11 @@ const x = createHashRouter([
       },
 
       {
+        path: "forgetPassword",
+        element: <ForgetPassword />,
+      },
+
+      {
         path: "*",
         element: <NotFound />,
       },
@@ -89,10 +98,26 @@ const x = createHashRouter([
   },
 ]);
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 10 * 1000,
+      refetchOnWindowFocus: false,
+      retry: 3,
+    },
+  },
+});
+
 export default function App() {
   return (
-    <UserContextProvider>
-      <RouterProvider router={x}></RouterProvider>
-    </UserContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <UserContextProvider>
+        <CartContextProvider>
+          <RouterProvider router={x}></RouterProvider>
+        </CartContextProvider>
+      </UserContextProvider>
+
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   );
 }

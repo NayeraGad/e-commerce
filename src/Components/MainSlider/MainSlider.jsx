@@ -24,7 +24,7 @@ export default function MainSlider() {
   return (
     <div className="container">
       <div className="grid grid-cols-12 mb-4">
-        <div className="md:col-span-8">
+        <div className="col-span-12 md:col-span-8">
           <Slider {...settings}>
             <img
               src={slide_1}
@@ -46,7 +46,7 @@ export default function MainSlider() {
           </Slider>
         </div>
 
-        <div className="md:col-span-4">
+        <div className="flex col-span-6 md:col-span-4 md:flex-col">
           <img
             src={img_1}
             alt=""

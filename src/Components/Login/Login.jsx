@@ -2,7 +2,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
 import { LiaSpinnerSolid } from "react-icons/lia";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { UserContext } from "../../Context/UserContext";
 
@@ -52,7 +52,7 @@ export default function Login() {
       );
 
       if (data.message == "success") {
-        setToken(data.token)
+        setToken(data.token);
         navigate("/");
       }
     } catch (error) {
@@ -128,17 +128,26 @@ export default function Login() {
           </div>
         ))}
 
-        <button
-          type="submit"
-          disabled={isLoading || !formik.isValid || !formik.dirty}
-          className="btn form-btn"
-        >
-          {isLoading ? (
-            <LiaSpinnerSolid className=" animate-spin" />
-          ) : (
-            "Login Now"
-          )}
-        </button>
+        <div className="flex justify-between items-center">
+          <Link
+            to={"/forgetPassword"}
+            className="text-xl font-medium transition hover:text-green-500"
+          >
+            Forget your password ?
+          </Link>
+
+          <button
+            type="submit"
+            disabled={isLoading || !formik.isValid || !formik.dirty}
+            className="btn form-btn"
+          >
+            {isLoading ? (
+              <LiaSpinnerSolid className=" animate-spin" />
+            ) : (
+              "Login Now"
+            )}
+          </button>
+        </div>
       </form>
     </div>
   );

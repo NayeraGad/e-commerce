@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
+import logoLight from "../../assets/images/logo-light.svg";
 import {
   FaFacebook,
   FaLinkedinIn,
@@ -10,6 +11,8 @@ import {
 import { useContext, useEffect, useState } from "react";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { UserContext } from "../../Context/UserContext";
+import { TiShoppingCart } from "react-icons/ti";
+import { CartContext } from "../../Context/CartContext";
 
 const navLinks = [
   { url: "", name: "Home" },
@@ -29,7 +32,24 @@ const socialMedia = [
 
 export default function Navbar() {
   const { token, setToken } = useContext(UserContext);
+  const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
+
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("color-theme") === "dark" ||
+      (!("color-theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+  );
+
+  useEffect(() => {
+    const html = document.querySelector("html");
+
+    if (isDarkMode) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  });
 
   function logOut() {
     setToken(null);
@@ -43,7 +63,11 @@ export default function Navbar() {
           to=""
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <img src={logo} alt="logo" />
+          <img
+            src={isDarkMode ? logoLight : logo}
+            alt="logo"
+            // className="w-28"
+          />
         </NavLink>
 
         <button
@@ -75,6 +99,30 @@ export default function Navbar() {
           id="navbar-default"
           className="hidden grow w-full lg:flex justify-between items-center lg:w-auto"
         >
+          {/* Navbar Links if user is not signed */}
+          {!token && (
+            <ul className="font-medium flex flex-col lg:ms-auto lg:items-center px-4 lg:p-0 lg:flex-row lg:space-x-8 rtl:space-x-reverse dark:bg-gray-800 lg:dark:bg-gray-900">
+              <li>
+                <NavLink
+                  to="login"
+                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                >
+                  Login
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="register"
+                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                >
+                  Register
+                </NavLink>
+              </li>
+            </ul>
+          )}
+
+          {/* Navbar Links if user signed */}
           {token && (
             <div className="grow w-full lg:flex justify-between items-center lg:w-auto">
               <ul className="font-medium flex flex-col px-4 lg:p-0 mt-4 lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
@@ -110,66 +158,27 @@ export default function Navbar() {
               >
                 Log out
               </span>
+
+              <span className="relative flex justify-center items-center p-2 lg:py-0 w-fit mx-auto lg:mx-0">
+                <TiShoppingCart className="text-4xl" />
+                <span className="absolute top-1 end-2 px-1 bg-green-500 rounded-md text-white text-sm lg:-top-1">
+                  {cartItems}
+                </span>
+              </span>
             </div>
           )}
 
-          {!token && (
-            <ul className="font-medium flex flex-col lg:ms-auto lg:items-center px-4 lg:p-0 lg:flex-row lg:space-x-8 rtl:space-x-reverse dark:bg-gray-800 lg:dark:bg-gray-900">
-              <li>
-                <NavLink
-                  to="login"
-                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Login
-                </NavLink>
-              </li>
-
-              <li>
-                <NavLink
-                  to="register"
-                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
-                >
-                  Register
-                </NavLink>
-              </li>
-            </ul>
-          )}
-
           <span className="block py-2 px-7 text-center lg:py-0">
-            <ToggleMode />
+            <button onClick={() => setIsDarkMode(!isDarkMode)}>
+              {isDarkMode ? (
+                <MdDarkMode className="text-white transition-colors hover:text-yellow-400" />
+              ) : (
+                <MdLightMode className="transition-colors hover:text-yellow-400" />
+              )}
+            </button>
           </span>
         </div>
       </div>
     </nav>
-  );
-}
-
-function ToggleMode() {
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("color-theme") === "dark" ||
-      (!("color-theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-  );
-
-  useEffect(() => {
-    const html = document.querySelector("html");
-
-    if (isDarkMode) {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-  });
-
-  return (
-    <>
-      <button onClick={() => setIsDarkMode(!isDarkMode)}>
-        {isDarkMode ? (
-          <MdDarkMode className="text-white transition-colors hover:text-yellow-400" />
-        ) : (
-          <MdLightMode className="transition-colors hover:text-yellow-400" />
-        )}
-      </button>
-    </>
   );
 }

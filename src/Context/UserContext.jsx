@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-export const UserContext = createContext(0);
+export const UserContext = createContext();
 
 export default function UserContextProvider(props) {
   const [token, setToken] = useState(localStorage.getItem('token'));
