@@ -55,7 +55,7 @@ export default function Cart() {
 
   return (
     <div className="container">
-      <h2 className="mt-3 mb-6 text-green-500">Cart Details</h2>
+      <h2 className="mt-3 mb-6 text-green-500">Cart</h2>
 
       {cartDetails == null ? (
         <p className=" text-xl font-bold">your cart is empty</p>

@@ -3,8 +3,9 @@ import { FaHeart, FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../Context/CartContext";
+import { wishContext } from "../../Context/WishContext";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -22,15 +23,39 @@ export default function ProductDetails() {
   });
 
   const { addProductToCart, setCartItems } = useContext(CartContext);
+  const { getWishList, addWishList, deleteWishList } = useContext(wishContext);
+
+  const [wishlist, setWishlist] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   async function addProduct(id) {
+    setLoading(true);
     const { data } = await addProductToCart(id);
 
     if (data.status === "success") {
       setCartItems(data.numOfCartItems);
       alert("Product is added to your cart");
     }
+    setLoading(false);
   }
+
+  function handleAddWishList(id) {
+    setLoading(true);
+    if (wishlist.includes(id)) {
+      deleteWishList.mutate(id);
+      setWishlist((prev) => prev.filter((itemId) => itemId !== id));
+    } else {
+      addWishList.mutate(id);
+      setWishlist((prev) => [...prev, id]);
+    }
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    if (getWishList.data) {
+      setWishlist(getWishList.data.map((item) => item._id));
+    }
+  }, [getWishList.data]);
 
   if (isError) {
     return <h3>{JSON.stringify(error.message)}</h3>;
@@ -38,7 +63,7 @@ export default function ProductDetails() {
 
   return (
     <div className="container">
-      {isLoading ? (
+      {isLoading || loading ? (
         <Loading />
       ) : (
         <div className="grid md:grid-cols-12">
@@ -70,8 +95,14 @@ export default function ProductDetails() {
                 + Add to Cart
               </button>
 
-              <button>
-                <FaHeart className="cursor-pointer text-xl transition duration-300 hover:text-red-600" />
+              <button onClick={() => handleAddWishList(productDetails._id)}>
+                <FaHeart
+                  className={`text-xl transition duration-300 hover:text-red-600 ${
+                    wishlist.includes(productDetails._id)
+                      ? "text-red-600"
+                      : "text-gray-500"
+                  }`}
+                />
               </button>
             </div>
           </div>

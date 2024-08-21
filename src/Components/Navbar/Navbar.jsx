@@ -17,9 +17,10 @@ import { CartContext } from "../../Context/CartContext";
 const navLinks = [
   { url: "", name: "Home" },
   { url: "products", name: "products" },
+  { url: "cart", name: "cart" },
+  { url: "wishList", name: "wish list" },
   { url: "categories", name: "categories" },
   { url: "brands", name: "brands" },
-  { url: "cart", name: "cart" },
 ];
 
 const socialMedia = [
@@ -159,12 +160,15 @@ export default function Navbar() {
                 Log out
               </span>
 
-              <span className="relative flex justify-center items-center p-2 lg:py-0 w-fit mx-auto lg:mx-0">
+              <NavLink
+                to={"/cart"}
+                className="relative flex justify-center items-center p-2 lg:py-0 w-fit mx-auto lg:mx-0"
+              >
                 <TiShoppingCart className="text-4xl" />
                 <span className="absolute top-1 end-2 px-1 bg-green-500 rounded-md text-white text-sm lg:-top-1">
                   {cartItems}
                 </span>
-              </span>
+              </NavLink>
             </div>
           )}
 

@@ -15,6 +15,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 import CartContextProvider from "./Context/CartContext";
+import WishList from "./Components/WishList/WishList";
+import WishContextProvider from "./Context/WishContext";
 
 const x = createHashRouter([
   {
@@ -35,6 +37,24 @@ const x = createHashRouter([
         element: (
           <ProtectedRoute>
             <Products />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "cart",
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "wishList",
+        element: (
+          <ProtectedRoute>
+            <WishList />
           </ProtectedRoute>
         ),
       },
@@ -62,15 +82,6 @@ const x = createHashRouter([
         element: (
           <ProtectedRoute>
             <Brands />
-          </ProtectedRoute>
-        ),
-      },
-
-      {
-        path: "cart",
-        element: (
-          <ProtectedRoute>
-            <Cart />
           </ProtectedRoute>
         ),
       },
@@ -113,7 +124,9 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <UserContextProvider>
         <CartContextProvider>
-          <RouterProvider router={x}></RouterProvider>
+          <WishContextProvider>
+            <RouterProvider router={x}></RouterProvider>
+          </WishContextProvider>
         </CartContextProvider>
       </UserContextProvider>
 

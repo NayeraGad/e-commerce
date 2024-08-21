@@ -3,8 +3,9 @@ import { FaHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../Context/CartContext";
+import { wishContext } from "../../Context/WishContext";
 
 export default function Products() {
   const {
@@ -19,6 +20,15 @@ export default function Products() {
   });
 
   const { addProductToCart, setCartItems } = useContext(CartContext);
+  const { getWishList, addWishList, deleteWishList } = useContext(wishContext);
+
+  const [wishlist, setWishlist] = useState([]);
+
+  useEffect(() => {
+    if (getWishList.data) {
+      setWishlist(getWishList.data.map((item) => item._id));
+    }
+  }, [getWishList.data]);
 
   async function addProduct(id) {
     const { data } = await addProductToCart(id);
@@ -26,6 +36,16 @@ export default function Products() {
     if (data.status === "success") {
       setCartItems(data.numOfCartItems);
       alert("Product is added to your cart");
+    }
+  }
+
+  function handleAddWishList(id) {
+    if (!wishlist.includes(id)) {
+      deleteWishList.mutate(id);
+      setWishlist((prev) => prev.filter((itemId) => itemId !== id));
+    } else {
+      addWishList.mutate(id);
+      setWishlist((prev) => [...prev, id]);
     }
   }
 
@@ -75,8 +95,14 @@ export default function Products() {
                   + Add to Cart
                 </button>
 
-                <button>
-                  <FaHeart className="text-xl transition duration-300 hover:text-red-600" />
+                <button onClick={() => handleAddWishList(product._id)}>
+                  <FaHeart
+                    className={`text-xl transition duration-300 hover:text-red-600 ${
+                      wishlist.includes(product._id)
+                        ? "text-red-600"
+                        : "text-gray-500"
+                    }`}
+                  />
                 </button>
               </div>
             </div>
