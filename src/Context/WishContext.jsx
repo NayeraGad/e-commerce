@@ -1,6 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { createContext } from "react";
+import axios from "axios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const wishContext = createContext();
 
@@ -16,32 +16,35 @@ export default function WishContextProvider({ children }) {
     select: (data) => data.data.data,
   });
 
-  const addWishList = useMutation({
-    mutationFn: (id) =>
-      axios.post(
+  async function addWishList(id) {
+    try {
+      await axios.post(
         "https://ecommerce.routemisr.com/api/v1/wishlist",
-        { productId : id },
+        { productId: id },
+        { headers }
+      );
+      queryClient.refetchQueries(["wishList"]);
+    } catch (error) {
+      console.error("Error adding item to wish list", error);
+    }
+  }
+
+  async function deleteWishList(id) {
+    try {
+      await axios.delete(
+        `https://ecommerce.routemisr.com/api/v1/wishlist/${id}`,
         {
           headers,
         }
-      ),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["wishList"]);
-    },
-  });
-
-  const deleteWishList = useMutation({
-    mutationFn: (id) =>
-      axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${id}`, {
-        headers,
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries(["wishList"]);
-    },
-  });
+      );
+      queryClient.refetchQueries(["wishList"]);
+    } catch (error) {
+      console.error("Error deleting item from wish list", error);
+    }
+  }
 
   return (
-    <wishContext.Provider value={{ getWishList, deleteWishList, addWishList }}>
+    <wishContext.Provider value={{ getWishList, addWishList, deleteWishList }}>
       {children}
     </wishContext.Provider>
   );

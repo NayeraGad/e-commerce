@@ -1,15 +1,35 @@
 import axios from "axios";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { useParams } from "react-router-dom";
-import Loading from "../Loading/Loading";
+import Loading from "../../Components/Loading/Loading";
 import { useQuery } from "@tanstack/react-query";
 import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { wishContext } from "../../Context/WishContext";
+import Slider from "react-slick";
+import toast from "react-hot-toast";
+import InnerLoading from "../../Components/InnerLoading/InnerLoading";
 
 export default function ProductDetails() {
   const { id } = useParams();
 
+  // Slider Settings
+  const settings = {
+    dots: true,
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    appendDots: (dots) => <ul>{dots}</ul>,
+    customPaging: () => (
+      <div>
+        <div className="dots" />
+      </div>
+    ),
+  };
+
+  // Get product details
   const {
     data: productDetails,
     isLoading,
@@ -34,21 +54,28 @@ export default function ProductDetails() {
 
     if (data.status === "success") {
       setCartItems(data.numOfCartItems);
-      alert("Product is added to your cart");
+      toast.success("Product is added to your cart", { icon: "🛒" });
     }
     setLoading(false);
   }
 
-  function handleAddWishList(id) {
+  async function handleAddWishList(id) {
     setLoading(true);
-    if (wishlist.includes(id)) {
-      deleteWishList.mutate(id);
-      setWishlist((prev) => prev.filter((itemId) => itemId !== id));
-    } else {
-      addWishList.mutate(id);
-      setWishlist((prev) => [...prev, id]);
+    try {
+      if (wishlist.includes(id)) {
+        await deleteWishList(id);
+        setWishlist((prev) => prev.filter((itemId) => itemId !== id));
+        toast.success("Product is removed to your wishlist");
+      } else {
+        await addWishList(id);
+        setWishlist((prev) => [...prev, id]);
+        toast.success("Product is added to your wishlist", { icon: "❤" });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -63,12 +90,22 @@ export default function ProductDetails() {
 
   return (
     <div className="container">
-      {isLoading || loading ? (
+      {isLoading ? (
         <Loading />
       ) : (
-        <div className="grid md:grid-cols-12">
-          <div className="col-span-4 p-5">
-            <img src={productDetails.imageCover} alt={productDetails.title} />
+        <div className="grid grid-cols-1 md:grid-cols-12">
+          {loading && <InnerLoading />}
+          <div className="col-span-4 p-5 ">
+            <Slider {...settings}>
+              {productDetails.images.map((img) => (
+                <img
+                  src={img}
+                  key={img}
+                  alt={productDetails.title}
+                  className="cursor-grab mb-2"
+                />
+              ))}
+            </Slider>
           </div>
 
           <div className="col-span-8 flex flex-col gap-4 p-5 self-center">

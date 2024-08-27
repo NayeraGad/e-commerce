@@ -74,7 +74,7 @@ export default function Navbar() {
         <button
           data-collapse-toggle="navbar-default"
           type="button"
-          className="inline-flex items-center ms-auto p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+          className="inline-flex items-center ms-auto p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           aria-controls="navbar-default"
           aria-expanded="false"
         >
@@ -98,15 +98,15 @@ export default function Navbar() {
 
         <div
           id="navbar-default"
-          className="hidden grow w-full lg:flex justify-between items-center lg:w-auto"
+          className="hidden grow w-full xl:flex justify-between items-center xl:w-auto"
         >
           {/* Navbar Links if user is not signed */}
           {!token && (
-            <ul className="font-medium flex flex-col lg:ms-auto lg:items-center px-4 lg:p-0 lg:flex-row lg:space-x-8 rtl:space-x-reverse dark:bg-gray-800 lg:dark:bg-gray-900">
+            <ul className="font-medium flex flex-col xl:ms-auto xl:items-center px-4 xl:p-0 xl:flex-row xl:space-x-8 rtl:space-x-reverse dark:bg-gray-800 xl:dark:bg-gray-900">
               <li>
                 <NavLink
                   to="login"
-                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-500 transition xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
                 >
                   Login
                 </NavLink>
@@ -115,7 +115,7 @@ export default function Navbar() {
               <li>
                 <NavLink
                   to="register"
-                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                  className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-500 transition xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
                 >
                   Register
                 </NavLink>
@@ -125,13 +125,13 @@ export default function Navbar() {
 
           {/* Navbar Links if user signed */}
           {token && (
-            <div className="grow w-full lg:flex justify-between items-center lg:w-auto">
-              <ul className="font-medium flex flex-col px-4 lg:p-0 mt-4 lg:flex-row lg:space-x-8 rtl:space-x-reverse lg:mt-0 lg:border-0 dark:bg-gray-800 lg:dark:bg-gray-900 dark:border-gray-700">
+            <div className="grow w-full xl:flex justify-between items-center xl:w-auto">
+              <ul className="font-medium flex flex-col px-4 xl:p-0 mt-4 xl:flex-row xl:space-x-8 rtl:space-x-reverse xl:mt-0 xl:border-0 dark:bg-gray-800 xl:dark:bg-gray-900 dark:border-gray-700">
                 {navLinks.map((link) => (
                   <li key={link.name}>
                     <NavLink
                       to={link.url}
-                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-500 transition xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
                     >
                       {link.name}
                     </NavLink>
@@ -139,13 +139,13 @@ export default function Navbar() {
                 ))}
               </ul>
 
-              <ul className="font-medium flex lg:items-center justify-center px-4 lg:p-0 lg:space-x-8 rtl:space-x-reverse dark:bg-gray-800 lg:dark:bg-gray-900">
+              <ul className="font-medium flex xl:items-center justify-center px-4 xl:p-0 xl:space-x-8 rtl:space-x-reverse dark:bg-gray-800 xl:dark:bg-gray-900">
                 {socialMedia.map((link) => (
                   <li key={link.url}>
                     <NavLink
                       to={link.url}
                       target="_blank"
-                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                      className="block capitalize py-2 px-3 text-gray-900 rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-500 transition xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
                     >
                       {link.element}
                     </NavLink>
@@ -155,24 +155,24 @@ export default function Navbar() {
 
               <span
                 onClick={logOut}
-                className="block cursor-pointer capitalize py-2 text-center text-gray-900 font-bold rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-green-500 transition lg:p-0 dark:text-white lg:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent"
+                className="block cursor-pointer capitalize py-2 text-center text-gray-900 font-bold rounded hover:bg-gray-100 xl:hover:bg-transparent xl:border-0 xl:hover:text-green-500 transition xl:p-0 dark:text-white xl:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white xl:dark:hover:bg-transparent"
               >
                 Log out
               </span>
 
               <NavLink
                 to={"/cart"}
-                className="relative flex justify-center items-center p-2 lg:py-0 w-fit mx-auto lg:mx-0"
+                className="relative flex justify-center items-center p-2 xl:py-0 w-fit mx-auto xl:mx-0"
               >
                 <TiShoppingCart className="text-4xl" />
-                <span className="absolute top-1 end-2 px-1 bg-green-500 rounded-md text-white text-sm lg:-top-1">
+                <span className="absolute top-1 end-2 px-1 bg-green-500 rounded-md text-white text-sm xl:-top-1">
                   {cartItems}
                 </span>
               </NavLink>
             </div>
           )}
 
-          <span className="block py-2 px-7 text-center lg:py-0">
+          <span className="block py-2 px-7 text-center xl:py-0">
             <button onClick={() => setIsDarkMode(!isDarkMode)}>
               {isDarkMode ? (
                 <MdDarkMode className="text-white transition-colors hover:text-yellow-400" />

@@ -1,5 +1,5 @@
-import CategorySlider from "../CategorySlider/CategorySlider";
-import MainSlider from "../MainSlider/MainSlider";
+import CategorySlider from "../../Components/CategorySlider/CategorySlider";
+import MainSlider from "../../Components/MainSlider/MainSlider";
 import Products from "../Products/Products";
 
 export default function Home() {

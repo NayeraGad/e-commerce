@@ -1,10 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { wishContext } from "../../Context/WishContext";
 import { FaTrash } from "react-icons/fa";
-import Loading from "../Loading/Loading";
+import Loading from "../../Components/Loading/Loading";
 import { CartContext } from "../../Context/CartContext";
+import InnerLoading from "../../Components/InnerLoading/InnerLoading";
 
 export default function WishList() {
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const { getWishList, deleteWishList } = useContext(wishContext);
   const { addProductToCart, setCartItems } = useContext(CartContext);
 
@@ -14,29 +17,36 @@ export default function WishList() {
     error,
     isError,
   } = getWishList;
-  const isDeleting = deleteWishList.isLoading;
 
   async function addProduct(id) {
-    const { data } = await addProductToCart(id);
-
-    if (data.status === "success") {
-      setCartItems(data.numOfCartItems);
-      deleteWishList.mutate(id);
-      alert("Product is added to your cart");
+    setIsAddingToCart(true);
+    try {
+      const { data } = await addProductToCart(id);
+      if (data.status === "success") {
+        setCartItems(data.numOfCartItems);
+        await deleteWishList(id);
+        alert("Product is added to your cart");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsAddingToCart(false);
     }
   }
 
-  if (isGettingWishList || isDeleting) {
+  async function handleDelete(id) {
+    setIsDeleting(true);
+    await deleteWishList(id);
+    setIsDeleting(false);
+  }
+
+  if (isGettingWishList) {
     return <Loading />;
   }
 
   if (isError) {
     return <div>Error: {error.message}</div>;
   }
-
-  const handleDelete = (id) => {
-    deleteWishList.mutate(id);
-  };
 
   return (
     <div className="container">
@@ -76,6 +86,8 @@ export default function WishList() {
               </div>
             </div>
           ))}
+
+          {(isAddingToCart || isDeleting) && <InnerLoading />}
         </div>
       )}
     </div>

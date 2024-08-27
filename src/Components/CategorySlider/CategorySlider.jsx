@@ -38,13 +38,13 @@ export default function CategorySlider() {
     <div className="overflow-hidden my-9 px-3 sm:p-0">
       <Slider {...settings}>
         {categories?.map((category) => (
-          <div key={category.name} className="">
+          <div key={category.name} className="cursor-grab">
             <img
               src={category.image}
               className="w-full h-60 object-cover"
               alt={category.name}
             />
-            <h3 className="h4 mt-2">{category.name}</h3>
+            <h3 className="h4 mt-2 md:ml-2">{category.name}</h3>
           </div>
         ))}
       </Slider>

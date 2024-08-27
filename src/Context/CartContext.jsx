@@ -4,8 +4,10 @@ import { createContext, useEffect, useState } from "react";
 export const CartContext = createContext();
 
 export default function CartContextProvider({ children }) {
-  const [cartItems, setCartItems] = useState(0)
+  const [cartItems, setCartItems] = useState(0);
+  const [ownerId, setOwnerId] = useState(localStorage.getItem("ownerId"));
   const token = localStorage.getItem("token");
+  const BaseURL = localStorage.getItem("baseURL");
   const headers = { token };
 
   function getUserCart() {
@@ -55,16 +57,32 @@ export default function CartContextProvider({ children }) {
   }
 
   async function getCart() {
-  const {data} = await getUserCart()
+    const { data } = await getUserCart();
 
-  if(data.status == 'success' ) {
-    setCartItems(data.numOfCartItems);
+    if (data.status == "success") {
+      ownerId
+        ? localStorage.setItem("ownerId", ownerId)
+        : localStorage.removeItem("ownerId");
+      setCartItems(data.numOfCartItems);
+    }
   }
+
+  function checkOutSession(cartId, shippingAddress) {
+    return axios
+      .post(
+        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${BaseURL}`,
+        {
+          shippingAddress,
+        },
+        { headers }
+      )
+      .then((data) => data)
+      .catch((err) => err);
   }
 
   useEffect(() => {
-    getCart()
-  }, [])
+    getCart();
+  }, []);
 
   return (
     <CartContext.Provider
@@ -76,6 +94,9 @@ export default function CartContextProvider({ children }) {
         deleteUserCart,
         cartItems,
         setCartItems,
+        checkOutSession,
+        setOwnerId,
+        ownerId,
       }}
     >
       {children}

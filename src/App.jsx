@@ -1,24 +1,29 @@
-import { createHashRouter, RouterProvider } from "react-router-dom";
-import Layout from "./Components/Layout/Layout";
-import Products from "./Components/Products/Products";
-import Home from "./Components/Home/Home";
-import Categories from "./Components/Categories/Categories";
-import Brands from "./Components/Brands/Brands";
-import Login from "./Components/Login/Login";
-import Register from "./Components/Register/Register";
-import Cart from "./Components/Cart/Cart";
-import NotFound from "./Components/NotFound/NotFound";
-import UserContextProvider from "./Context/UserContext";
-import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
-import ProductDetails from "./Components/ProductDetails/ProductDetails";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
+import Products from "./Pages/Products/Products";
+import Home from "./Pages/Home/Home";
+import Cart from "./Pages/Cart/Cart";
+import Categories from "./Pages/Categories/Categories";
+import CheckOut from "./Pages/CheckOut/CheckOut";
+import AllOrders from "./Pages/AllOrders/AllOrders";
+import Login from "./Pages/Login/Login";
+import Register from "./Pages/Register/Register";
+import ForgetPassword from "./Pages/ForgetPassword/ForgetPassword";
+import VerifyCode from "./Pages/VerifyCode/VerifyCode";
+import ResetPassword from "./Pages/ResetPassword/ResetPassword";
+import NotFound from "./Pages/NotFound/NotFound";
+import Brands from "./Pages/Brands/Brands";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import WishList from "./Pages/WishList/WishList";
+import Layout from "./Components/Layout/Layout";
+import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
+import UserContextProvider from "./Context/UserContext";
 import CartContextProvider from "./Context/CartContext";
-import WishList from "./Components/WishList/WishList";
 import WishContextProvider from "./Context/WishContext";
+import { Toaster } from "react-hot-toast";
 
-const x = createHashRouter([
+const x = createBrowserRouter([
   {
     path: "",
     element: <Layout />,
@@ -87,6 +92,24 @@ const x = createHashRouter([
       },
 
       {
+        path: "checkout/:cartId",
+        element: (
+          <ProtectedRoute>
+            <CheckOut />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "allorders",
+        element: (
+          <ProtectedRoute>
+            <AllOrders />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
         path: "login",
         element: <Login />,
       },
@@ -99,6 +122,16 @@ const x = createHashRouter([
       {
         path: "forgetPassword",
         element: <ForgetPassword />,
+      },
+
+      {
+        path: "verifyCode",
+        element: <VerifyCode />,
+      },
+
+      {
+        path: "resetPassword",
+        element: <ResetPassword />,
       },
 
       {
@@ -126,6 +159,17 @@ export default function App() {
         <CartContextProvider>
           <WishContextProvider>
             <RouterProvider router={x}></RouterProvider>
+            <Toaster
+              toastOptions={{
+                position: "top-right",
+                duration: 2000,
+                success: {
+                  style: {
+                    color: "#16a34a",
+                  },
+                },
+              }}
+            />
           </WishContextProvider>
         </CartContextProvider>
       </UserContextProvider>
