@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { LiaSpinnerSolid } from "react-icons/lia";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -51,6 +52,7 @@ export default function ResetPassword() {
 
       if (response.status == 200) {
         navigate("/login");
+        toast.success("Password changed successfully");
       }
     } catch (error) {
       setErrMsg(error.response.data.message);

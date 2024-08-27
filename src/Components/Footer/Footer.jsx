@@ -33,20 +33,23 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row md:justify-between border-y py-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap flex-row items-center gap-2">
             <h4>Payment Partners</h4>
-
-            {paymentImages.map((img, i) => {
-              return <img src={img} key={i} />;
-            })}
+            {paymentImages.map((img, i) => (
+              <img src={img} key={`payment${i}`} alt={`Payment${i}`} />
+            ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap flex-row items-center gap-2">
             <h4>Get deliveries with FreshCart</h4>
-
-            {storeImages.map((img, i) => {
-              return <img src={img} key={i} className="w-14" />;
-            })}
+            {storeImages.map((img, i) => (
+              <img
+                src={img}
+                key={`store${i}`}
+                alt={`Store${i}`}
+                className="w-14"
+              />
+            ))}
           </div>
         </div>
       </div>
