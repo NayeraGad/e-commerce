@@ -25,7 +25,7 @@ import { Toaster } from "react-hot-toast";
 
 const x = createBrowserRouter([
   {
-    path: "",
+    path: "/e-commerce/",
     element: <Layout />,
     children: [
       {
