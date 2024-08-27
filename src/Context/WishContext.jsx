@@ -1,11 +1,12 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { UserContext } from "./UserContext";
 
 export const wishContext = createContext();
 
 export default function WishContextProvider({ children }) {
-  const token = localStorage.getItem("token");
+    const { token } = useContext(UserContext);
   const headers = { token };
   const queryClient = useQueryClient();
 

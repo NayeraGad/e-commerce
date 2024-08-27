@@ -1,12 +1,13 @@
 import axios from "axios";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
 
 export const CartContext = createContext();
 
 export default function CartContextProvider({ children }) {
   const [cartItems, setCartItems] = useState(0);
   const [ownerId, setOwnerId] = useState(localStorage.getItem("ownerId"));
-  const token = localStorage.getItem("token");
+  const { token } = useContext(UserContext);
   const BaseURL = localStorage.getItem("baseURL");
   const headers = { token };
 
