@@ -47,8 +47,7 @@ export default function ForgetPassword() {
 
   return (
     <div className="container">
-      <p className="h2">Please enter your email</p>
-      <input type="email" />
+      <p className="h2 mb-4">Please enter your email</p>
 
       <form onSubmit={formik.handleSubmit}>
         <input

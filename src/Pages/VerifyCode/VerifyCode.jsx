@@ -38,8 +38,7 @@ export default function VerifyCode() {
 
   return (
     <div className="container">
-      <p className="h2">Please enter verifying code</p>
-      <input type="email" />
+      <p className="h2 mb-4">Please enter verifying code</p>
 
       <form onSubmit={formik.handleSubmit}>
         <input

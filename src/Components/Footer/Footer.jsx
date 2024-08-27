@@ -32,7 +32,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row md:justify-between border-y py-3">
+        <div className="flex flex-col lg:flex-row lg:justify-between border-y py-3">
           <div className="flex items-center gap-2">
             <h4>Payment Partners</h4>
 

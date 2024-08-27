@@ -11,13 +11,21 @@ export default function CartContextProvider({ children }) {
   const BaseURL = localStorage.getItem("baseURL");
   const headers = { token };
 
-  function getUserCart() {
-    return axios
-      .get("https://ecommerce.routemisr.com/api/v1/cart", {
-        headers,
-      })
-      .then((data) => data)
-      .catch((err) => err);
+  async function getUserCart() {
+    try {
+      const { data } = await axios.get(
+        "https://ecommerce.routemisr.com/api/v1/cart",
+        { headers }
+      );
+      if (data.status === "success") {
+        setOwnerId(data.data.cartOwner); // Save cart owner ID
+        localStorage.setItem("ownerId", data.data.cartOwner); // Save cart owner ID to localStorage
+        setCartItems(data.numOfCartItems);
+        return data;
+      }
+    } catch (error) {
+      console.error("Error fetching user cart:", error);
+    }
   }
 
   function addProductToCart(p_id) {

@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import Loading from "../../Components/Loading/Loading";
 import { CartContext } from "../../Context/CartContext";
 import InnerLoading from "../../Components/InnerLoading/InnerLoading";
+import toast from "react-hot-toast";
 
 export default function WishList() {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -25,7 +26,7 @@ export default function WishList() {
       if (data.status === "success") {
         setCartItems(data.numOfCartItems);
         await deleteWishList(id);
-        alert("Product is added to your cart");
+        toast.success("Product is added to your cart", { icon: "🛒" });
       }
     } catch (error) {
       console.log(error);
@@ -37,6 +38,7 @@ export default function WishList() {
   async function handleDelete(id) {
     setIsDeleting(true);
     await deleteWishList(id);
+    toast.success("Product is removed from your wishlist");
     setIsDeleting(false);
   }
 
@@ -55,17 +57,17 @@ export default function WishList() {
       {!wishList || wishList.length === 0 ? (
         <div>No items in the wish list</div>
       ) : (
-        <div className="text-left shadow-md sm:rounded-lg rtl:text-right md:container">
+        <div className="text-left shadow-md md:rounded-lg rtl:text-right md:container">
           {wishList.map((item) => (
             <div
               key={item._id}
               className="flex flex-wrap items-center p-3 [&:not(:last-child)]:border-b"
             >
-              <div className="sm:w-3/12 bg-sky-600">
+              <div className="md:w-3/12 md:pr-4">
                 <img src={item.imageCover} alt={item._id} />
               </div>
 
-              <div className="flex grow justify-between items-center mt-5 mb-4 sm:mb-0">
+              <div className="flex grow justify-between items-center mt-5 mb-4 md:mb-0">
                 <div className="flex flex-col gap-y-2 max-w-[60%]">
                   <h3>{item.title}</h3>
                   <span className="text-green-500">{item.price} LE</span>

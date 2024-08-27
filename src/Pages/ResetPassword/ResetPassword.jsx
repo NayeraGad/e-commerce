@@ -61,7 +61,7 @@ export default function ResetPassword() {
 
   return (
     <div className="container mx-auto py-12">
-      <h2 className="mb-2">Reset Password</h2>
+      <h2 className="mb-4">Reset Password</h2>
 
       <form onSubmit={formik.handleSubmit} className="mt-6">
         {inputs.map((input) => (
@@ -71,6 +71,7 @@ export default function ResetPassword() {
               name={input.value}
               type={input.type}
               id={input.id}
+              placeholder={input.id}
               className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
             />
 

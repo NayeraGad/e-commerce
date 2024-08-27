@@ -55,7 +55,7 @@ export default function Products() {
       if (wishlist.includes(id)) {
         await deleteWishList(id);
         setWishlist((prev) => prev.filter((itemId) => itemId !== id));
-        toast.success("Product is removed to your wishlist");
+        toast.success("Product is removed from your wishlist");
       } else {
         await addWishList(id);
         setWishlist((prev) => [...prev, id]);

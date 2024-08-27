@@ -86,7 +86,7 @@ export default function Cart() {
         <p className="text-xl font-bold">Your cart is empty</p>
       ) : (
         <>
-          <div className="flex justify-between items-center mb-3 text-lg font-medium">
+          <div className="flex flex-col sm:flex-row justify-between items-center mb-3 text-lg font-medium">
             {isDeleting && <InnerLoading />}
             <p>
               Total Price:{" "}
@@ -206,7 +206,7 @@ export default function Cart() {
                 </div>
               ))}
 
-              <div className="flex justify-between">
+              <div className="flex flex-col justify-between sm:flex-row gap-y-2">
                 <button className="btn" onClick={deleteCart}>
                   Clear Your Cart
                 </button>
