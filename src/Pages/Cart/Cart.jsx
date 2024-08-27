@@ -25,10 +25,10 @@ export default function Cart() {
 
   async function getLoggedUserCart() {
     setIsLoading(true);
-    const { data } = await getUserCart();
+    const data = await getUserCart();
     if (data && data.status === "success") {
       setCartDetails(data);
-      setOwnerId(data.data.cartOwner);
+      setOwnerId(data.data.cartOwner); // Ensure ownerId is updated
     }
     setIsLoading(false);
   }
@@ -63,7 +63,6 @@ export default function Cart() {
       setCartItems(0);
       navigate("/");
       toast.success("Your cart is empty");
-      // setCartDetails(null);
     }
     setIsDeleting(false);
   }

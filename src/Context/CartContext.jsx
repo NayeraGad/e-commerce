@@ -65,17 +65,6 @@ export default function CartContextProvider({ children }) {
       .catch((err) => err);
   }
 
-  async function getCart() {
-    const { data } = await getUserCart();
-
-    if (data.status == "success") {
-      ownerId
-        ? localStorage.setItem("ownerId", ownerId)
-        : localStorage.removeItem("ownerId");
-      setCartItems(data.numOfCartItems);
-    }
-  }
-
   function checkOutSession(cartId, shippingAddress) {
     return axios
       .post(
@@ -90,8 +79,8 @@ export default function CartContextProvider({ children }) {
   }
 
   useEffect(() => {
-    getCart();
-  }, []);
+    getUserCart();
+  }, [token]);
 
   return (
     <CartContext.Provider

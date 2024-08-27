@@ -15,6 +15,7 @@ export default function WishContextProvider({ children }) {
     queryFn: () =>
       axios.get("https://ecommerce.routemisr.com/api/v1/wishlist", { headers }),
     select: (data) => data.data.data,
+    enabled: !!token
   });
 
   async function addWishList(id) {
