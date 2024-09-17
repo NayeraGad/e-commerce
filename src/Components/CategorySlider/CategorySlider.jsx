@@ -5,7 +5,8 @@ export default function CategorySlider() {
   const { data: categories, isError, error } = useCategories();
 
   const settings = {
-    dots: true,
+    dots: false,
+    arrows: false,
     infinite: true,
     speed: 500,
     slidesToShow: 6,
@@ -14,7 +15,6 @@ export default function CategorySlider() {
       {
         breakpoint: 1024,
         settings: {
-          dots: true,
           slidesToShow: 2,
           infinite: true,
         },
@@ -22,7 +22,6 @@ export default function CategorySlider() {
       {
         breakpoint: 640,
         settings: {
-          dots: true,
           slidesToShow: 1,
           infinite: true,
         },

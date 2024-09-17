@@ -12,19 +12,21 @@ export default function CartContextProvider({ children }) {
   const headers = { token };
 
   async function getUserCart() {
-    try {
-      const { data } = await axios.get(
-        "https://ecommerce.routemisr.com/api/v1/cart",
-        { headers }
-      );
-      if (data.status === "success") {
-        setOwnerId(data.data.cartOwner); // Save cart owner ID
-        localStorage.setItem("ownerId", data.data.cartOwner); // Save cart owner ID to localStorage
-        setCartItems(data.numOfCartItems);
-        return data;
+    if (token) {
+      try {
+        const { data } = await axios.get(
+          "https://ecommerce.routemisr.com/api/v1/cart",
+          { headers }
+        );
+        if (data.status === "success") {
+          setOwnerId(data.data.cartOwner); // Save cart owner ID
+          localStorage.setItem("ownerId", data.data.cartOwner); // Save cart owner ID to localStorage
+          setCartItems(data.numOfCartItems);
+          return data;
+        }
+      } catch (error) {
+        console.error("Error fetching user cart:", error);
       }
-    } catch (error) {
-      console.error("Error fetching user cart:", error);
     }
   }
 

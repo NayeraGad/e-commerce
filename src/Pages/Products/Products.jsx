@@ -85,7 +85,9 @@ export default function Products() {
           <input
             type="text"
             placeholder="Search..."
-            className="w-full mb-6 px-4 py-1 border rounded-md focus:outline-none focus:shadow-[0_0_5px_#4fa74f] "
+            className="w-full mb-6 px-4 py-1 border rounded-md focus:outline-none focus:shadow-[0_0_5px_#4fa74f] dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400
+               dark:text-white"
             value={searchItems}
             onChange={(e) => setSearchItems(e.target.value)}
           />
