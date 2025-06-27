@@ -1,9 +1,4 @@
-<h1>
-    <a href="https://e-commerce-orcin-seven-43.vercel.app/" style="color: inherit">
-        <img src="https://raw.githubusercontent.com/NayeraGad/e-commerce/main/src/assets/images/logo.svg#gh-light-mode-only" height="50" />
-        <img src="https://raw.githubusercontent.com/NayeraGad/e-commerce/main/src/assets/images/logo-light.svg#gh-dark-mode-only" height="50" />
-    </a>
-</h1>
+# 🛒 [FreshCart E-Commerce](https://e-commerce-orcin-seven-43.vercel.app/)
 
 A full-featured, modern e-commerce web application built with **React** and **TailwindCSS**, offering a clean interface, user authentication, cart/wishlist functionality, and dynamic UI interactions for a seamless shopping experience.
 
